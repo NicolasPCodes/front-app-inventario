@@ -1,0 +1,7 @@
+{
+  "name": "front-app-inventario",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
