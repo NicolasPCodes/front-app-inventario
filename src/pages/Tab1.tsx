@@ -8,16 +8,16 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Inicio</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
+            <IonTitle size="large">Inicio</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ListOptionsContainer name="Tab 1 page" />
+        <ListOptionsContainer name="¡Bienvenido a la aplicación de inventario!" />
       </IonContent>
     </IonPage>
   );

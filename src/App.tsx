@@ -44,6 +44,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import DetailDocument from './pages/DetailDocument';
 
 setupIonicReact();
 
@@ -63,6 +64,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/">
             <Redirect to="/tab1" />
+          </Route>
+          <Route exact path="/detail-oc/:oc">
+            <DetailDocument />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

@@ -33,7 +33,7 @@ const QRScanner: React.FC = () => {
     return(
         <div className="ion-padding">
             <h2>QR Code Scanner</h2>
-            <div id="reader" style={{ width: '500px' }}></div>
+            <div id="reader" style={{ width: '250px', height: '250px' }}></div>
         </div>
     );
 };

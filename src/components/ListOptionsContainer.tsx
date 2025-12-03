@@ -2,7 +2,7 @@ import { use } from 'react';
 import './ExploreContainer.css';
 import QRScanner from './QrScanner';
 import { useFetchData } from '../hooks/FetchEndpointHooks';
-import { IonItem, IonLabel, IonList, IonSpinner } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardTitle, IonCol, IonGrid, IonItem, IonLabel, IonList, IonRow, IonSpinner } from '@ionic/react';
 
 interface ContainerProps {
   name: string;
@@ -19,20 +19,15 @@ interface ApiResponseOc {
 
 const ListOptionsContainer: React.FC<ContainerProps> = ({ name }) => {
 
-  const {data, isLoading} = useFetchData<ApiResponseOc>({
-                                                        endpoint: 'listar_oc',
-                                                        methods: "POST",
-                                                        body: {
-                                                          "store_id": "COS"
-                                                        },
-                                                        filtros: null});
+  const {data, isLoading} = useFetchData<ApiResponseOc>({ endpoint: 'listar_oc', methods: "POST", body: { "store_id": "COS"},filtros: null});
   console.log(data);
   return (
     <div className="container">
       <strong>{name}</strong>
-      <strong>¡Bienvenido a la aplicación de inventario!</strong>
-      <strong>Seleccione una opción del menú para comenzar.</strong>
-      <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      {/* <strong>¡Bienvenido a la aplicación de inventario!</strong> */}
+      <br />
+      <strong>Seleccione una documento para comenzar recepcion.</strong>
+      <br />
       {/* <QRScanner /> */}
       {isLoading && <IonSpinner name="dots" />}
 
@@ -40,11 +35,12 @@ const ListOptionsContainer: React.FC<ContainerProps> = ({ name }) => {
       {!isLoading && data?.data && (
         <IonList>
           {data.data.map((oc, index) => (
-            <IonItem key={index}>
-              <IonLabel>
-                <h2>{oc.numero_oc}</h2>
-              </IonLabel>
-            </IonItem>
+              <IonButton
+                expand="block"
+                key={index}
+                style={{ minWidth: '350px', maxWidth: '500px' }}
+                onClick={() => window.location.href=`/detail-oc/${oc.numero_oc}`}>{oc.numero_oc}</IonButton>
+            // </IonItem>
           ))}
         </IonList>
       )}
