@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useFetchData } from "../hooks/FetchEndpointHooks";
-import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { IonCol, IonContent, IonGrid, IonIcon, IonRow } from "@ionic/react";
+import { checkmarkCircle, closeCircle } from "ionicons/icons";
 import QRScanner from "../components/QrScanner";
 
 interface Details {
@@ -9,6 +10,7 @@ interface Details {
   numero_oc: string;
   sku: string;
   tienda: string;
+  estado: boolean;
 }
 
 interface ApiResponseOc {
@@ -21,8 +23,9 @@ const DetailDocument: React.FC = () => {
   const { data, isLoading } = useFetchData<ApiResponseOc>({ endpoint: 'detalle_oc', methods: "POST", body: { "numero_oc": oc }, filtros: null });
   console.log(data);
   return (
+    <IonContent scrollY={true}>
     <div className="container">
-      <IonGrid style={{ marginTop: 200 }}>
+      <IonGrid style={{ marginTop: 100 }}>
       <strong>Recepcionando documento: <br /> {oc}</strong>
         <IonRow style={{ marginTop: 100 }}>
           <IonCol><strong>SKU</strong></IonCol>
@@ -33,10 +36,10 @@ const DetailDocument: React.FC = () => {
         {!isLoading && data?.data && (
           data.data.map((detail, index) => (
             <IonRow key={index}>
-              <IonCol>{detail.sku}</IonCol>
+              <IonCol style={{ paddingLeft: 10 }}>{detail.sku}</IonCol>
               <IonCol>{detail.cantidad}</IonCol>
               <IonCol>{detail.tienda}</IonCol>
-              <IonCol>true</IonCol>
+              <IonCol>{detail.estado ? <IonIcon icon={checkmarkCircle} color="success"  style={{ fontSize: "24px" }}/> : <IonIcon icon={closeCircle} color="danger"  style={{ fontSize: "24px" }}/>}</IonCol>
             </IonRow>
           ))
         )}
@@ -48,6 +51,7 @@ const DetailDocument: React.FC = () => {
         </div>
       </IonGrid>
     </div>
+    </IonContent>
   );
 };
 
