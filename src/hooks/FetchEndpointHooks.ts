@@ -12,11 +12,11 @@ interface UseFetchDataProps {
 }
 
 export function useFetchData<T = any>({
-    endpoint,
-    methods = "GET",
-    filtros,
-    body,
-    autoFetch = true
+  endpoint,
+  methods = "GET",
+  filtros,
+  body,
+  autoFetch = true
 }: UseFetchDataProps) {
   // Manejo de cambios en variables
   const [data, setData] = useState<T | null>(null);
@@ -41,11 +41,11 @@ export function useFetchData<T = any>({
       // Realiza la solicitud
       const response = await fetch(url, config);
 
-      if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+      // if (!response.ok) console.warn(`Error HTTP: ${response.status}`);
+      // if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
       const data = await response.json();
-      // console.log("Extrajo la info..");
-      // console.log(data);
+
       setData(data);
       setIsLoading(false);
     } catch (error) {
@@ -56,13 +56,14 @@ export function useFetchData<T = any>({
   };
   // Llama api
   useEffect(() => {
-    if (autoFetch){
-        fetchdata();
+    if (autoFetch) {
+      fetchdata();
     }
   }, [endpoint, methods, JSON.stringify(body), filtros]);
   // Retorna los valores
   return {
     data,
-    isLoading
+    isLoading,
+    fetchdata
   };
 };
